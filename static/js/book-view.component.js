@@ -194,6 +194,12 @@ Vue.component('book-view', {
   computed: {
     totalPages: function() {
       return this.viewingPages.length;
+    },
+    currentChapter: function() {
+      if (this.chapters) {
+        return this.chapters.indexOf(this.activeChapter);
+      }
+      return 0;
     }
   },
   filters: {
@@ -247,7 +253,7 @@ Vue.component('book-view', {
     <nav class="navbar navbar-light bg-light navbar-expand-sm">
       <small class="text-info pl-3"><a href="#" @click="loadShelf()"><i data-feather="book"></i></a></small>
       <small class="text-info pl-3"><a href="#" @click="prevChapter()"><i data-feather="arrow-left-circle"></i></a></small>
-      <small class="text-info pl-3">{{activePage+1}}/{{totalPages}}</small>
+      <small class="text-info pl-3">{{activePage+1}}/{{totalPages}} C{{currentChapter+1}}</small>
       <small class="text-info pl-3"><a href="#" @click="nextChapter()"><i data-feather="arrow-right-circle"></i></a></small>
       <small class="text-info pl-3"><a href="#" id="sidebarCollapse" >{{title}}</a></small>
     </nav>
