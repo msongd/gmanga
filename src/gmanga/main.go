@@ -10,7 +10,7 @@ import (
 
 var (
 	HOST     = flag.String("l", "-", "Listening interface")
-	DATA     = flag.String("d", "-", "Data dir: directory contains certs")
+	DATA     = flag.String("d", "-", "Data dir: directory contains manga directory")
 	RESOURCE = flag.String("s", "-", "Resource dir: javascript & html resource")
 )
 
