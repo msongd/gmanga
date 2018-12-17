@@ -158,6 +158,18 @@ Vue.component('book-view', {
         self.activeChapter = self.chapters[currentIdx+1];
       }
     },
+    gotoChapter: function(chapter) {
+      var self = this ;
+      console.log("Inside gotoChapter(): currentChapter:", self.activeChapter);
+      console.log("goto:", chapter);
+
+      if (self.chapters) {
+        var found = self.chapters.indexOf(chapter);
+        if (found >=0) {
+          self.activeChapter = chapter;
+        }
+      }
+    },
     fetchPages: function(chapter, lastPage) {
       var self = this ;
       console.log("Inside fetchPage():", chapter, self.title);
@@ -245,13 +257,13 @@ Vue.component('book-view', {
               </ul>
           </li>
           -->
-          <li v-for="item in chapters" v-bind:class="item==activeChapter?activeClass:''"><a href="#" @click="fetchPages(item)">{{item}}</a></li>
+          <li v-for="item in chapters" v-bind:class="item==activeChapter?activeClass:''"><a href="#" @click="gotoChapter(item)">{{item}}</a></li>
       </ul>
   </nav>
   <div id="content">
     <div class="container sticky-top ">
     <nav class="navbar navbar-light bg-light navbar-expand-sm">
-      <small class="text-info pl-3"><a href="#" @click="loadShelf()"><i data-feather="book"></i></a></small>
+      <small class="text-info pl-3"><a href="#" @click="loadShelf()"><i data-feather="home"></i></a></small>
       <small class="text-info pl-3"><a href="#" @click="prevChapter()"><i data-feather="arrow-left-circle"></i></a></small>
       <small class="text-info pl-3">{{activePage+1}}/{{totalPages}} C{{currentChapter+1}}</small>
       <small class="text-info pl-3"><a href="#" @click="nextChapter()"><i data-feather="arrow-right-circle"></i></a></small>
