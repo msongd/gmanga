@@ -41,9 +41,9 @@ func DefineRoutes(c *AppContext) *mux.Router {
 
 	r.Handle("/", ContextHandler{c, HomeHandler})
 	r.Handle("/global.js", ContextHandler{c, GlobalJSHandler})
-	r.Handle("/api/books", ContextHandler{c, ListBooksHandler}).Methods("OPTIONS", "GET")
-	r.Handle("/api/books/{book}/{chapter}", ContextHandler{c, GetChapterHandler}).Methods("OPTIONS", "GET")
-	r.Handle("/api/books/{book}", ContextHandler{c, GetBookHandler}).Methods("OPTIONS", "GET")
+	r.Handle("/api/books", ContextHandler{c, ListBooksHandler}).Methods("GET")
+	r.Handle("/api/books/{book}/{chapter}", ContextHandler{c, GetChapterHandler}).Methods("GET")
+	r.Handle("/api/books/{book}", ContextHandler{c, GetBookHandler}).Methods("GET")
 	r.Handle("/pages/{path:.*}", ContextHandler{c, GetPageHandler}).Methods("GET")
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(c.StaticDir))))
 	return r
@@ -67,17 +67,7 @@ func ListBooksHandler(c *AppContext, w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	} else {
 		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
-		if r.Method == "OPTIONS" {
-			w.Header().Set("Access-Control-Allow-Credentials", "true")
-			w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-			w.Header().Set("Access-Control-Max-Age", "3600")
-			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Accept")
-			fmt.Fprintf(w, "OK")
-		} else {
-			w.Write(ulist)
-		}
+		w.Write(ulist)
 	}
 }
 
@@ -89,24 +79,13 @@ func GetBookHandler(c *AppContext, w http.ResponseWriter, r *http.Request) {
 	if u == nil {
 		w.WriteHeader(http.StatusNotFound)
 	} else {
-		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
-		if r.Method == "OPTIONS" {
-			w.Header().Set("Access-Control-Allow-Credentials", "true")
-			w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-			w.Header().Set("Access-Control-Max-Age", "3600")
-			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Accept")
-			fmt.Fprintf(w, "OK")
+		ujson, err := json.Marshal(u)
+		if err != nil {
+			log.Println("[ERR] marshal:", err)
+			w.WriteHeader(http.StatusInternalServerError)
 		} else {
-			ujson, err := json.Marshal(u)
-			if err != nil {
-				log.Println("[ERR] marshal:", err)
-				w.WriteHeader(http.StatusInternalServerError)
-			} else {
-				w.Write(ujson)
-			}
+			w.Header().Set("Content-Type", "application/json")
+			w.Write(ujson)
 		}
 	}
 }
@@ -121,24 +100,13 @@ func GetChapterHandler(c *AppContext, w http.ResponseWriter, r *http.Request) {
 	if u == nil {
 		w.WriteHeader(http.StatusNotFound)
 	} else {
-		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
-		if r.Method == "OPTIONS" {
-			w.Header().Set("Access-Control-Allow-Credentials", "true")
-			w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-			w.Header().Set("Access-Control-Max-Age", "3600")
-			w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Accept")
-			fmt.Fprintf(w, "OK")
+		ujson, err := json.Marshal(u)
+		if err != nil {
+			log.Println("[ERR] marshal:", err)
+			w.WriteHeader(http.StatusInternalServerError)
 		} else {
-			ujson, err := json.Marshal(u)
-			if err != nil {
-				log.Println("[ERR] marshal:", err)
-				w.WriteHeader(http.StatusInternalServerError)
-			} else {
-				w.Write(ujson)
-			}
+			w.Header().Set("Content-Type", "application/json")
+			w.Write(ujson)
 		}
 	}
 }
