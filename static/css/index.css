@@ -8,3 +8,14 @@ body {
   text-align: center;
 }
 
+.card {
+  margin-top: 1em;
+}
+
+.sliding-link {
+  margin-right: 0.3em;
+}
+
+.link-top {
+  margin-right: 1em;
+}
