@@ -25,7 +25,7 @@ Vue.component('book-view', {
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
     });
     $('#carouselImg').on('slid.bs.carousel', this.onSlid);
-    feather.replace();
+    
     var hasBookmark = this.loadFromBookmark();
     if (!hasBookmark)
       this.fetchChapterInfo();
@@ -236,7 +236,7 @@ Vue.component('book-view', {
   <!-- Sidebar  -->
   <nav id="sidebar">
       <div id="dismiss">
-          <i data-feather="arrow-left"></i>
+          <i class="material-icons">arrow_left</i>
       </div>
 
       <div class="sidebar-header">
@@ -263,10 +263,10 @@ Vue.component('book-view', {
   <div id="content">
     <div class="container sticky-top ">
     <nav class="navbar navbar-light bg-light navbar-expand-sm">
-      <small class="text-info pl-3"><a href="#" @click="loadShelf()"><i data-feather="home"></i></a></small>
-      <small class="text-info pl-3"><a href="#" @click="prevChapter()"><i data-feather="arrow-left-circle"></i></a></small>
+      <small class="text-info pl-3"><a href="#" @click="loadShelf()"><i class="material-icons">dashboard</i></a></small>
+      <small class="text-info pl-3"><a href="#" @click="prevChapter()"><i class="material-icons">arrow_back</i></a></small>
       <small class="text-info pl-3">{{activePage+1}}/{{totalPages}} C{{currentChapter+1}}</small>
-      <small class="text-info pl-3"><a href="#" @click="nextChapter()"><i data-feather="arrow-right-circle"></i></a></small>
+      <small class="text-info pl-3"><a href="#" @click="nextChapter()"><i class="material-icons">arrow_forward</i></a></small>
       <small class="text-info pl-3"><a href="#" id="sidebarCollapse" >{{title}}</a></small>
     </nav>
     </div>

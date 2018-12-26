@@ -11,7 +11,6 @@ Vue.component('shelf-card', {
       this.slideLink(e);
     });
     */
-    feather.replace();
   },
   beforeDestroy(){
     //$('.sliding-link').off('click', function (e) {});
@@ -81,10 +80,10 @@ Vue.component('shelf-card', {
               <div class="col-sm-4" v-for="(item) in books"  >
               <div class="card" v-bind:jumptag="item | firstChar" >
                 <div class="card-title card-header text-monospace text-truncate" >
-                <div class="float-left">
-                  <a href="#tableOfContent" class="link-top"><i data-feather="arrow-up-circle"></i></a>
-                </div>
-                <a v-bind:id="item">{{item}}</a>
+                  <div class="float-left">
+                    <a href="#tableOfContent" class="link-top"><i class="material-icons">arrow_upward</i></a>
+                  </div>
+                  <a v-bind:id="item">{{item}}</a>
                 </div>
                 <div class="card-body">
                 <a href="#" @click="loadBook(item)"><img class="card-img-bottom" :src="'/pages/'+item+'/'+item+'.thumb'"/></a>

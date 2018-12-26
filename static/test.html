@@ -8,24 +8,37 @@
     <meta name="author" content="">
     <!-- <link rel="icon" href="../../../../favicon.ico"> -->
 
-    <title>Viewer</title>
+    <title></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/material-icons.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="/static/css/index.css" rel="stylesheet">
-    <link href="/static/css/sidebar.css" rel="stylesheet">
   </head>
 
   <body>
-    <div role="main" class="container-fluid" id="app">
-      <template v-if="activeView==='shelf'">
-        <shelf-card v-on:load-book="loadBook"></shelf-card>
-      </template>
-      <template v-if="activeView==='book'">
-        <book-view v-on:load-shelf="loadShelf" v-bind:title="viewingBook"></book-view>
-      </template>
+    <div role="main" class="container-fluid">
+        <div class="main-template">
+            <div class="row" id="tableOfContent">
+              <a href="#" class="sliding-link" jumptag="A" >A</a>
+            </div>
+            <div class="row">
+            <div class="col-sm-4">
+            <div class="card" jumptag="A" >
+              <div class="card-title card-header text-monospace text-truncate" >
+                <div class="float-left">
+                  <a href="#tableOfContent" class="link-top"><i class="material-icons">arrow_upward</i></a>
+                </div>
+                <a id="item">item</a>
+              </div>
+              <div class="card-body">
+              <a href="#" ><img class="card-img-bottom" src="/pages/notexist.thumb"/></a>
+              </div>
+            </div>
+            </div>
+            </div>    
+          </div>
     </div><!-- /.container -->
 
     <!-- Bootstrap core JavaScript
@@ -37,14 +50,7 @@
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/global.js"></script>
     <script src="/static/js/vue.js"></script>
-    <script src="/static/js/shelf-card.component.js"></script>
-    <script src="/static/js/book-view.component.js"></script>
     <script src="/static/js/index.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        
-      });
-  </script>
-</body>
+  </body>
 </html>
 
