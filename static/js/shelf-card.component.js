@@ -79,11 +79,9 @@ Vue.component('shelf-card', {
               <div class="row">
               <div class="col-sm-4" v-for="(item) in books"  >
               <div class="card" v-bind:jumptag="item | firstChar" >
-                <div class="card-title card-header text-monospace text-truncate" >
-                  <div class="float-left">
-                    <a href="#tableOfContent" class="link-top"><i class="material-icons">arrow_upward</i></a>
-                  </div>
-                  <a v-bind:id="item">{{item}}</a>
+                <div class="card-title card-header text-monospace text-truncate d-flex" >
+                  <a href="#tableOfContent" class="link-top"><i class="material-icons">arrow_upward</i></a>
+                  <a v-bind:id="item" class="flex-grow-1">{{item}}</a>
                 </div>
                 <div class="card-body">
                 <a href="#" @click="loadBook(item)"><img class="card-img-bottom" :src="'/pages/'+item+'/'+item+'.thumb'"/></a>

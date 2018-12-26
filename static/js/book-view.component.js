@@ -262,12 +262,12 @@ Vue.component('book-view', {
   </nav>
   <div id="content">
     <div class="container sticky-top ">
-    <nav class="navbar navbar-light bg-light navbar-expand-sm">
-      <small class="text-info pl-3"><a href="#" @click="loadShelf()"><i class="material-icons">dashboard</i></a></small>
-      <small class="text-info pl-3"><a href="#" @click="prevChapter()"><i class="material-icons">arrow_back</i></a></small>
-      <small class="text-info pl-3">{{activePage+1}}/{{totalPages}} C{{currentChapter+1}}</small>
-      <small class="text-info pl-3"><a href="#" @click="nextChapter()"><i class="material-icons">arrow_forward</i></a></small>
-      <small class="text-info pl-3"><a href="#" id="sidebarCollapse" >{{title}}</a></small>
+    <nav class="navbar navbar-light bg-light navbar-expand-sm d-flex align-items-baseline">
+      <div class="small"><a href="#" @click="loadShelf()"><i class="material-icons">dashboard</i></a></div>
+      <div class="small"><a href="#" @click="prevChapter()"><i class="material-icons">arrow_back</i></a></div>
+      <div class="small">{{activePage+1}}/{{totalPages}} C{{currentChapter+1}}</div>
+      <div class="small"><a href="#" @click="nextChapter()"><i class="material-icons">arrow_forward</i></a></div>
+      <div class="small"><a href="#" id="sidebarCollapse" class="small flex-grow-1" >{{title}}</a></div>
     </nav>
     </div>
     <h2></h2>

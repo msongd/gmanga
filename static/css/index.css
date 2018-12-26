@@ -5,11 +5,14 @@ body {
 
 .main-template {
   padding: 1rem 1.5rem;
-  text-align: center;
 }
 
 .card {
   margin-top: 1em;
+}
+
+.card-title {
+  text-align: center;
 }
 
 .sliding-link {
@@ -18,4 +21,9 @@ body {
 
 .link-top {
   margin-right: 1em;
+}
+
+#tableOfContent {
+  padding-left: 15px;
+  padding-right: 15px;
 }
