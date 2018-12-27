@@ -236,38 +236,23 @@ Vue.component('book-view', {
   <!-- Sidebar  -->
   <nav id="sidebar">
       <div id="dismiss">
-          <i class="material-icons">arrow_left</i>
+        <span><i class="material-icons">arrow_back</i></span>
       </div>
 
       <div class="sidebar-header">
-          <h4>Chapters</h4>
+          <h5>Chapters</h5>
       </div>
 
       <ul class="list-unstyled components">
-          <!--
-          <li class="active">
-              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                  <li>
-                      <a href="#">Home 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Home 2</a>
-                  </li>
-              </ul>
-          </li>
-          -->
           <li v-for="item in chapters" v-bind:class="item==activeChapter?activeClass:''"><a href="#" @click="gotoChapter(item)">{{item}}</a></li>
       </ul>
   </nav>
   <div id="content">
     <div class="container sticky-top ">
-    <nav class="navbar navbar-light bg-light navbar-expand-sm d-flex align-items-baseline pl-0">
+    <nav class="navbar navbar-light bg-light navbar-expand-sm d-flex align-items-center pl-0 pb-0">
       <a href="#" @click="loadShelf()"><i class="material-icons">dashboard</i></a>
       <a href="#" @click="prevChapter()"  class="pl-2"><i class="material-icons pr-2">arrow_back</i></a>
-      <div class="flex-grow-1 text-center small">
-        <a href="#" id="sidebarCollapse" class="" >{{activePage+1}}/{{totalPages}} C{{currentChapter+1}} {{title}}</a>
-      </div>
+      <span id="sidebarCollapse" class="flex-grow-1 w-25 text-center text-truncate material-text" >{{activePage+1}}/{{totalPages}} C{{currentChapter+1}} {{title}}</span>
       <a href="#" @click="nextChapter()"><i class="material-icons pl-2">arrow_forward</i></a>
     </nav>
     </div>

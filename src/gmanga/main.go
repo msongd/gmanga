@@ -9,9 +9,9 @@ import (
 )
 
 var (
-	HOST     = flag.String("l", "-", "Listening interface")
+	HOST     = flag.String("l", "127.0.0.1:8080", "Listening interface, default: 127.0.0.1:8080")
 	DATA     = flag.String("d", "-", "Data dir: directory contains manga directory")
-	RESOURCE = flag.String("s", "-", "Resource dir: javascript & html resource")
+	RESOURCE = flag.String("s", "static", "Resource dir: javascript & html resource, default: static dir in current dir")
 )
 
 func validateConfig() {
@@ -41,7 +41,7 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	flag.Parse()
 
-	if *HOST == "-" || *DATA == "-" {
+	if *DATA == "-" {
 		flag.PrintDefaults()
 		return
 	}
@@ -55,8 +55,8 @@ func main() {
 	globalContext.Lib = NewLibrary(*DATA)
 	scanResult := globalContext.Lib.LoadAll()
 	log.Println("Scan result:", scanResult)
-	dd := globalContext.Lib.Dump()
-	log.Println("Dump result:\n", dd)
+	//dd := globalContext.Lib.Dump()
+	//log.Println("Dump result:\n", dd)
 	log.Println("----")
 	/// watcher
 	done := make(chan bool)
@@ -75,7 +75,7 @@ func main() {
 		}
 		//// end watcher
 	*/
-	log.Printf("%+v\n", globalContext)
+	//log.Printf("%+v\n", globalContext)
 
 	// start server
 	stop := make(chan os.Signal)
