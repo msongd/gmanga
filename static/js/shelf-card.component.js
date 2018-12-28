@@ -1,4 +1,5 @@
 Vue.component('shelf-card', {
+  props: ['lastView'],
   data: function() {
     return {
         books: {},
@@ -29,13 +30,37 @@ Vue.component('shelf-card', {
     fetchBooksInfo: function(event) {
       var self = this ;
       console.log("Inside fetchBooksInfo()");
-      fetch('/api/books', {
-        method: 'GET'//,
-        /*
-        headers: {
-          "Content-Type": "application/json",
-        }*/
-      }).then(
+      if (localStorage.getItem("books")) {
+        try {
+          console.log("load books from cache")
+          self.books = JSON.parse(localStorage.getItem('books'));
+          self.$nextTick(function() {
+            console.log("finish loading books from cache");
+            if (self.lastView) {
+              console.log("jump to last view book:", self.lastView);
+              var aid = $("a#"+self.lastView).parent("div");
+              if (aid)
+                $('html,body').animate({scrollTop: $(aid).offset().top},'slow');        
+            }
+          });
+        } catch(e) {
+          console.log("load cache ex:", e);
+          localStorage.removeItem('books');
+          self.books = null;
+        }
+      } else {
+        console.log("unable to load books from cache")
+        self.books = null;
+      }
+      if (!self.books) {
+        console.log("load chapter from network");
+        fetch('/api/books', {
+          method: 'GET'//,
+          /*
+          headers: {
+            "Content-Type": "application/json",
+          }*/
+        }).then(
           function(response) {
             if (response.status !== 200) {
               console.log('Looks like there was a problem. Status Code: ' + response.status);
@@ -45,12 +70,24 @@ Vue.component('shelf-card', {
             response.json().then(function(data) {
               //console.log(data);
               self.books = data;
+              const parsed = JSON.stringify(data);
+              localStorage.setItem("books", parsed);
+
+              self.$nextTick(function() {
+                console.log("finish loading books from network");
+                if (self.lastView) {
+                  console.log("jump to last view book:", self.lastView);
+                  var aid = $("a#"+self.lastView).parent("div");
+                  if (aid)
+                    $('html,body').animate({scrollTop: $(aid).offset().top},'slow');
+                }
+              });
             });
           }
-        )
-        .catch(function(err) {
+        ).catch(function(err) {
           console.log('Fetch Error :-S', err);
         });
+      }
     }
   },
   filters: {

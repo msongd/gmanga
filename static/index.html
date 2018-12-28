@@ -21,7 +21,7 @@
   <body>
     <div role="main" class="container-fluid" id="app">
       <template v-if="activeView==='shelf'">
-        <shelf-card v-on:load-book="loadBook"></shelf-card>
+        <shelf-card v-on:load-book="loadBook" v-bind:last-view="viewingBook"></shelf-card>
       </template>
       <template v-if="activeView==='book'">
         <book-view v-on:load-shelf="loadShelf" v-bind:title="viewingBook"></book-view>

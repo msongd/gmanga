@@ -76,7 +76,7 @@ Vue.component('book-view', {
     loadShelf: function() {
       var self = this;
       console.log('inside book-view.loadShelf');
-      self.$emit('load-shelf');
+      self.$emit('load-shelf', self.title);
     },
     fetchChapterInfo: function(lastChapter) {
       var self = this ;

@@ -16,11 +16,11 @@ var app = new Vue({
             self.activeView = 'book';
             self.viewingBook = book;
         },
-        loadShelf: function() {
+        loadShelf: function(ev) {
             var self = this;
-            console.log("Inside root.loadShelf");
+            console.log("Inside root.loadShelf:", ev);
             self.activeView = 'shelf';
-            self.viewingBook = '';
+            self.viewingBook = ev;
         }
     },
 });
