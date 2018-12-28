@@ -8,7 +8,8 @@ Vue.component('book-view', {
         activeChapter: '',
         viewingPages:[],
         activePage:0,
-        jumpToPage:0
+        jumpToPage:0,
+        nextChapterTimer: '',
     }
   },
   mounted: function() {
@@ -43,6 +44,7 @@ Vue.component('book-view', {
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
     });
     $('#carouselImg').off('slid.bs.carousel', this.onSlid);
+    clearTimeout(this.nextChapterTimer);
   },
   methods: {
     loadFromBookmark: function() {
@@ -69,6 +71,11 @@ Vue.component('book-view', {
     onSlid(event) {
       //console.log("slid event", event);
       this.activePage = event.to ;
+
+      if (event.to === (this.viewingPages.length-1)) {
+        console.log("reach last page, will jump to next chapter after 10s");
+        this.nextChapterTimer = setTimeout(this.nextChapter, 10000);
+      }
     },
     onSlide() {
       console.log("slide event");
