@@ -252,8 +252,9 @@ Vue.component('book-view', {
     <nav class="navbar navbar-light bg-light navbar-expand-sm d-flex align-items-center pl-0 pb-0">
       <a href="#" @click="loadShelf()"><i class="material-icons">dashboard</i></a>
       <a href="#" @click="prevChapter()"  class="pl-2"><i class="material-icons pr-2">arrow_back</i></a>
-      <span id="sidebarCollapse" class="flex-grow-1 w-25 text-center text-truncate material-text" >{{activePage+1}}/{{totalPages}} C{{currentChapter+1}} {{title}}</span>
+      <span class="text-center material-text" >{{activePage+1}}/{{totalPages}} C{{currentChapter+1}}</span>
       <a href="#" @click="nextChapter()"><i class="material-icons pl-2">arrow_forward</i></a>
+      <span id="sidebarCollapse" class="flex-grow-1 w-25 text-center text-truncate material-text" >{{title}}</span>
     </nav>
     </div>
     <h2></h2>
