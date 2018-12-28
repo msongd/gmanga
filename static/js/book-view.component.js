@@ -145,6 +145,7 @@ Vue.component('book-view', {
       var self = this ;
       console.log("Inside prevChapter(): currentChapter:", self.activeChapter);
       var currentIdx = self.chapters.indexOf(self.activeChapter);
+      clearTimeout(this.nextChapterTimer);
       console.log("currentIdx:", currentIdx);
 
       if (currentIdx == 0) {
@@ -157,6 +158,7 @@ Vue.component('book-view', {
       var self = this ;
       console.log("Inside nextChapter(): currentChapter:", self.activeChapter);
       var currentIdx = self.chapters.indexOf(self.activeChapter);
+      clearTimeout(this.nextChapterTimer);
       console.log("currentIdx:", currentIdx);
 
       if (currentIdx == self.chapters.length-1) {
@@ -169,6 +171,8 @@ Vue.component('book-view', {
       var self = this ;
       console.log("Inside gotoChapter(): currentChapter:", self.activeChapter);
       console.log("goto:", chapter);
+      
+      clearTimeout(this.nextChapterTimer);
 
       if (self.chapters) {
         var found = self.chapters.indexOf(chapter);
