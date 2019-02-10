@@ -10,6 +10,7 @@ Vue.component('book-view', {
         activePage:0,
         jumpToPage:0,
         nextChapterTimer: '',
+        delay: 10,
     }
   },
   mounted: function() {
@@ -74,7 +75,7 @@ Vue.component('book-view', {
 
       if (event.to === (this.viewingPages.length-1)) {
         console.log("reach last page, will jump to next chapter after 10s");
-        this.nextChapterTimer = setTimeout(this.nextChapter, 10000);
+        this.nextChapterTimer = setTimeout(this.nextChapter,this.delay*1000);
       }
     },
     onSlide() {
@@ -275,7 +276,7 @@ Vue.component('book-view', {
       <li v-for="img in viewingPages"><img :src="'/pages/'+img"/></li>
       </ul>
       -->
-      <div id="carouselImg" class="carousel slide" data-ride="carousel" data-wrap="false" data-interval="10000">
+      <div id="carouselImg" class="carousel slide" data-ride="carousel" data-wrap="false" data-interval="false">
         <div class="carousel-inner">
           <div class="carousel-item" v-for="(img,idx) in viewingPages" :key="idx" v-bind:class="idx==activePage?activeClass:''">
             <img class="d-block w-100 img-fluid" :src="'/pages/'+img"/>

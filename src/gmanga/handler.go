@@ -50,7 +50,8 @@ func DefineRoutes(c *AppContext) *mux.Router {
 }
 
 func HomeHandler(c *AppContext, w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hellow world")
+	//fmt.Fprintf(w, "Hellow world")
+    http.Redirect(w,r, "/static/",301)
 	return
 }
 
